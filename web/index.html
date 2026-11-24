@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Relay Desk 预览版</title>
+  <link rel="icon" href="relay-logo.png">
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><img src="relay-logo.png" width="38" height="38" alt=""><strong>Relay Desk</strong></div>
+    <nav aria-label="主导航">
+      <button type="button" class="nav" id="show-accounts" aria-pressed="true">账号管理</button>
+      <button type="button" class="nav" id="show-network" aria-pressed="false">网络与诊断</button>
+    </nav>
+  </header>
+  <main>
+    <div class="network-banner">
+      <p id="network-summary" role="status">正在读取本机网络设置…</p>
+      <button type="button" id="network-details">查看网络</button>
+    </div>
+    <section id="accounts" aria-labelledby="accounts-title">
+      <div class="page-head">
+        <div><h1 id="accounts-title">账号管理</h1><p>管理本机监控账号，查看额度和重置时间。</p></div>
+        <div class="actions">
+          <button type="button" id="open-folder">数据目录</button>
+          <button type="button" id="refresh-all">刷新全部</button>
+          <button type="button" class="primary" id="add-account">添加账号</button>
+        </div>
+      </div>
+      <p id="empty" class="panel">添加账号后，这里会显示登录状态和额度。</p>
+      <div id="account-list" class="accounts"></div>
+    </section>
+    <section id="network" aria-labelledby="network-title" hidden>
+      <div class="page-head"><div><h1 id="network-title">网络与诊断</h1><p>设置账号查询与设备登录的网络连接。</p></div></div>
+      <div class="settings-grid">
+        <form id="network-form" class="panel">
+          <h2>连接方式</h2>
+          <label class="choice"><input type="radio" name="mode" value="system" checked>使用本机网络</label>
+          <p class="hint">默认沿用 Windows 或环境变量中的代理配置。检测到代理时自动采用配置里的地址和端口。</p>
+          <label class="choice"><input type="radio" name="mode" value="proxy">手动指定代理</label>
+          <label id="proxy-field" class="field" hidden>代理地址
+            <input id="proxy" type="text" placeholder="http://127.0.0.1:8080" maxlength="256" autocomplete="off" disabled>
+          </label>
+          <button type="submit" class="primary" id="save-network">保存网络设置</button>
+        </form>
+        <section class="panel" aria-labelledby="diag-title">
+          <h2 id="diag-title">连接检查</h2>
+          <p class="hint">检查 Codex 与设备登录服务能否响应当前网络。</p>
+          <div class="actions">
+            <button type="button" id="retry-network">重新检测网络</button>
+            <button type="button" id="run-diagnostics">检查本机环境</button>
+          </div>
+          <dl id="network-checks" hidden></dl>
+          <dl id="diagnostics" hidden></dl>
+        </section>
+      </div>
+    </section>
+    <p id="status" role="status" hidden></p>
+    <button type="button" id="show-login" hidden>查看设备登录代码</button>
+  </main>
+  <dialog id="dialog" aria-labelledby="dialog-title">
+    <header><h2 id="dialog-title"></h2><button type="button" id="dialog-close" aria-label="关闭弹窗">关闭</button></header>
+    <div id="dialog-body"></div>
+  </dialog>
+</body>
+</html>

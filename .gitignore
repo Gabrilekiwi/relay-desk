@@ -1,0 +1,20 @@
+# Build outputs, caches and local account data
+/dist/
+/.smoke-webview/
+/.smoke-state/
+/.webview2*/
+/.workbench-state/
+/**/__pycache__/
+*.py[cod]
+*.log
+*.tmp
+*.exe
+*.dll
+*.nupkg
+auth.json
+accounts.json
+settings.json
+quota.json
+secrets/
+profiles/
+desktop-state/
